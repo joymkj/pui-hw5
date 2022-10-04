@@ -53,10 +53,6 @@
   font-size: 18px;
 }
 
-.product input[type='radio']:checked + label {
-  /* background-color: #c0c0c0; */
-}
-
 .product select {
   appearance: none;
   padding: 5px;

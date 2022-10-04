@@ -11,6 +11,7 @@ function App() {
   const [latestRoll, setLatestRoll] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [cart, setCart] = useState([]);
+  const [sort, setSort] = useState('Name');
 
   const updateCart = (Roll) => {
     setCartSize(cartSize + 1);
@@ -31,13 +32,39 @@ function App() {
   }, [cartSize]);
 
   function renderRolls(Inventory) {
-    return <Product key={Inventory.id} id={Inventory.id} updateCart={updateCart} />;
+    return (
+      <Product
+        key={Inventory.id}
+        id={Inventory.id}
+        rollName={Inventory.name}
+        rollPrice={Inventory.price}
+        rollURL={Inventory.url}
+        updateCart={updateCart}
+      />
+    );
+  }
+
+  function handleSort(sortSelection) {
+    setSort(sortSelection);
+    if (sortSelection === 'Name') Inventory.sort((a, b) => (a.name > b.name ? 1 : -1));
+    else Inventory.sort((a, b) => (a.price > b.price ? 1 : -1));
   }
 
   return (
     <div className="App">
       <Navbar cartSize={cartSize} cartTotal={cartTotal} roll={latestRoll} showPopup={showPopup} />
-      <div className="Gallery">{Inventory.map(renderRolls)}</div>
+      <div className="Gallery">
+        <div className="menu">
+          <input type="text" />
+          <button>Search</button>
+          <p style={{ display: 'inline' }}>sort by: </p>
+          <select onChange={(e) => handleSort(e.target.value)}>
+            <option value="Name">Name</option>
+            <option value="Base Price">Base Price</option>
+          </select>
+        </div>
+        {Inventory.map(renderRolls)}
+      </div>
     </div>
   );
 }

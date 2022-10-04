@@ -2,14 +2,14 @@ import Inventory, { glazingPrice, packPrice } from './Inventory.jsx';
 import './Product.css';
 import { useEffect, useState } from 'react';
 
-function Product({ id, updateCart }) {
-  const [price, setPrice] = useState(parseFloat(Inventory[id].price));
+function Product({ id, rollName, rollPrice, rollURL, updateCart }) {
+  const [price, setPrice] = useState(parseFloat(rollPrice));
   const [glazing, setGlazing] = useState('Keep Original');
   const [packSize, setPackSize] = useState(1);
 
   function addToCart() {
     let roll = {
-      type: Inventory[id].name,
+      type: rollName,
       price: price,
       glazing: glazing,
       packSize: packSize,
@@ -18,25 +18,25 @@ function Product({ id, updateCart }) {
   }
 
   useEffect(() => {
-    let newPrice = (parseFloat(Inventory[id].price) + glazingPrice[glazing]) * packPrice[packSize];
+    let newPrice = (parseFloat(rollPrice) + glazingPrice[glazing]) * packPrice[packSize];
     setPrice(newPrice.toFixed(2));
   }, [glazing, packSize]);
 
   return (
     <div className="product">
-      <img src={process.env.PUBLIC_URL + Inventory[id].url} alt={Inventory[id].name} width="260px" />
-      <h2 className="product-name">{Inventory[id].name}</h2>
+      <img src={process.env.PUBLIC_URL + rollURL} alt={rollName} width="260px" />
+      <h2 className="product-name">{rollName}</h2>
       <form>
         <table>
           <tbody>
             <tr>
               <td className="cell-left">
-                <label form={Inventory[id].name}>Glazing:</label>
+                <label form={rollName}>Glazing:</label>
               </td>
               <td className="cell-right">
                 <select
-                  name={Inventory[id].name}
-                  id={Inventory[id].name}
+                  name={rollName}
+                  id={rollName}
                   value={glazing}
                   className="glaze-menu"
                   onChange={(e) => setGlazing(e.target.value)}>
