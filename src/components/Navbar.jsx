@@ -2,6 +2,10 @@ import './Navbar.css';
 import CartPopup from './CartPopup';
 
 function Navbar(props) {
+  function displayCart() {
+    props.setShowCart(true);
+  }
+
   return (
     <div className="Header">
       <div className="header">
@@ -10,10 +14,12 @@ function Navbar(props) {
           <nav>
             <ul>
               <li className="current-page">
-                <a href="">PRODUCTS</a>
+                <a href="#">PRODUCTS</a>
               </li>
               <li>
-                <a href="">CART</a>
+                <a href="#" onClick={displayCart}>
+                  CART
+                </a>
               </li>
             </ul>
           </nav>

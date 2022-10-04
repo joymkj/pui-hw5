@@ -4,6 +4,7 @@ import Product from './Product.jsx';
 import Inventory from './Inventory';
 import MenuBar from './MenuBar';
 import CartItem from './CartItem';
+import CartContainer from './CartContainer';
 
 import { useState, useEffect } from 'react';
 
@@ -17,9 +18,12 @@ function App() {
   const [search, setSearch] = useState('');
   const [productList, setProductList] = useState(Inventory);
   const [searchMatch, setSearchMatch] = useState(true);
+  const [cartID, setCartID] = useState(0);
+  const [showCart, setShowCart] = useState(false);
 
   const updateCart = (Roll) => {
-    Roll.id = cartSize;
+    Roll.id = cartID;
+    setCartID(cartID + 1);
     setCartSize(cartSize + 1);
     setCartTotal(cartTotal + parseFloat(Roll.price));
     setLatestRoll(Roll);
@@ -35,7 +39,7 @@ function App() {
     return () => {
       clearTimeout(timer);
     };
-  }, [cartSize]);
+  }, [cartID]);
 
   function renderRolls(productList) {
     return (
@@ -71,30 +75,37 @@ function App() {
     return (
       <CartItem
         key={cart.id}
+        id={cart.id}
         name={cart.type}
-        // url="/assets/apple-cinnamon-roll.jpg"
         url={'/assets/' + cart.type.replace(/ /g, '-').toLowerCase() + '.jpg'}
         glazing={cart.glazing}
         packSize={cart.packSize}
         price={cart.price}
+        deleteCart={deleteCart}
       />
     );
   }
 
+  function deleteCart(id, price) {
+    setCartTotal(cartTotal - price);
+    setCartSize(cartSize - 1);
+    setCart(cart.filter((item) => item.id !== id));
+  }
+
+  function displayCart() {
+    return <CartContainer cartSize={cartSize} renderCart={renderCart} cart={cart} />;
+  }
+
   return (
     <div className="App">
-      <Navbar cartSize={cartSize} cartTotal={cartTotal} roll={latestRoll} showPopup={showPopup} />
-      {/* CART HERE */}
-      <div className="cartContainer">
-        <hr />
-        <div className="cartWindow">
-          {cartSize ? <h1>Shopping Cart ({cartSize} items)</h1> : <h1>The cart is empty!</h1>}
-          {cart.map(renderCart)};
-        </div>
-        <hr />
-      </div>
-
-      {/* CART END */}
+      <Navbar
+        cartSize={cartSize}
+        cartTotal={cartTotal}
+        roll={latestRoll}
+        showPopup={showPopup}
+        setShowCart={setShowCart}
+      />
+      {showCart ? displayCart() : ''}
       <div className="Gallery">
         <MenuBar handleSearch={handleSearch} searchButtonClicked={searchButtonClicked} handleSort={handleSort} />
         {searchMatch || productList.length ? productList.map(renderRolls) : <p>No Match!</p>}

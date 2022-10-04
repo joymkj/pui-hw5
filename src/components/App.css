@@ -2,24 +2,3 @@
   max-width: 1000px;
   margin: auto;
 }
-
-/* cart styles below */
-.cartContainer {
-  max-width: 1300px;
-  margin: auto;
-}
-
-.cartContainer hr {
-  height: 8px;
-  background: #7b6666;
-}
-
-.cartWindow {
-  max-width: 1000px;
-  margin: auto;
-}
-
-.cartWindow h1 {
-  font-size: 25px;
-  font-weight: normal;
-}
