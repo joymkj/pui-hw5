@@ -1,0 +1,30 @@
+.cartItem {
+  width: 220px;
+  display: inline-block;
+}
+.cartItem img {
+  display: block;
+  margin: auto;
+}
+
+.cartItemInfo {
+  position: relative;
+  width: 220px;
+  margin: auto;
+}
+.cartItemInfo p {
+  text-align: center;
+  margin: 5px auto 5px auto;
+  font-size: 15px;
+}
+
+.priceText {
+  font-weight: bold;
+}
+.cartItemInfo button {
+  display: block;
+  margin: 10px auto auto auto;
+  border: none;
+  background-color: white;
+  text-decoration: underline;
+}

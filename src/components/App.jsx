@@ -3,6 +3,7 @@ import Navbar from './Navbar.jsx';
 import Product from './Product.jsx';
 import Inventory from './Inventory';
 import MenuBar from './MenuBar';
+import CartItem from './CartItem';
 
 import { useState, useEffect } from 'react';
 
@@ -18,6 +19,7 @@ function App() {
   const [searchMatch, setSearchMatch] = useState(true);
 
   const updateCart = (Roll) => {
+    Roll.id = cartSize;
     setCartSize(cartSize + 1);
     setCartTotal(cartTotal + parseFloat(Roll.price));
     setLatestRoll(Roll);
@@ -65,9 +67,34 @@ function App() {
     setProductList(Inventory.filter((str) => str.name.toLowerCase().includes(search)));
   }
 
+  function renderCart(cart) {
+    return (
+      <CartItem
+        key={cart.id}
+        name={cart.type}
+        // url="/assets/apple-cinnamon-roll.jpg"
+        url={'/assets/' + cart.type.replace(/ /g, '-').toLowerCase() + '.jpg'}
+        glazing={cart.glazing}
+        packSize={cart.packSize}
+        price={cart.price}
+      />
+    );
+  }
+
   return (
     <div className="App">
       <Navbar cartSize={cartSize} cartTotal={cartTotal} roll={latestRoll} showPopup={showPopup} />
+      {/* CART HERE */}
+      <div className="cartContainer">
+        <hr />
+        <div className="cartWindow">
+          {cartSize ? <h1>Shopping Cart ({cartSize} items)</h1> : <h1>The cart is empty!</h1>}
+          {cart.map(renderCart)};
+        </div>
+        <hr />
+      </div>
+
+      {/* CART END */}
       <div className="Gallery">
         <MenuBar handleSearch={handleSearch} searchButtonClicked={searchButtonClicked} handleSort={handleSort} />
         {searchMatch || productList.length ? productList.map(renderRolls) : <p>No Match!</p>}
