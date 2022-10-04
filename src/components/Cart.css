@@ -13,7 +13,14 @@
   margin: auto;
 }
 
-.cartWindow h1 {
+.cartTotal {
+  text-align: right;
+  margin-right: 0;
+  margin-left: 550px;
+}
+
+.info h1 {
   font-size: 25px;
   font-weight: normal;
+  display: inline-block;
 }

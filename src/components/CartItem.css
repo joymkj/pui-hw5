@@ -11,6 +11,7 @@
   position: relative;
   width: 220px;
   margin: auto;
+  padding-bottom: 20px;
 }
 .cartItemInfo p {
   text-align: center;

@@ -4,7 +4,7 @@ import Product from './Product.jsx';
 import Inventory from './Inventory';
 import MenuBar from './MenuBar';
 import CartItem from './CartItem';
-import CartContainer from './CartContainer';
+import Cart from './Cart';
 
 import { useState, useEffect } from 'react';
 
@@ -93,7 +93,7 @@ function App() {
   }
 
   function displayCart() {
-    return <CartContainer cartSize={cartSize} renderCart={renderCart} cart={cart} />;
+    return <Cart cartSize={cartSize} renderCart={renderCart} cart={cart} cartTotal={cartTotal} />;
   }
 
   return (

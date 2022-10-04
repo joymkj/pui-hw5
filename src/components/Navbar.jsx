@@ -27,7 +27,7 @@ function Navbar(props) {
           <p className="cart-info">
             {props.cartSize} items
             <br />
-            Total: $ {props.cartTotal.toFixed(2)}
+            Total: $ {Math.abs(props.cartTotal).toFixed(2)}
           </p>
           <hr />
           <h1>Our hand-made cinnamon rolls</h1>
