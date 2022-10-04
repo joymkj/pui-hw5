@@ -103,6 +103,7 @@ function App() {
         cartTotal={cartTotal}
         roll={latestRoll}
         showPopup={showPopup}
+        showCart={showCart}
         setShowCart={setShowCart}
       />
       {showCart ? displayCart() : ''}

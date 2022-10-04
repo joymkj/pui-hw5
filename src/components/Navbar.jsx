@@ -3,7 +3,7 @@ import CartPopup from './CartPopup';
 
 function Navbar(props) {
   function displayCart() {
-    props.setShowCart(true);
+    props.setShowCart(!props.showCart);
   }
 
   return (

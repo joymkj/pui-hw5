@@ -1,6 +1,7 @@
 .cartItem {
   width: 220px;
   display: inline-block;
+  margin: 10px;
 }
 .cartItem img {
   display: block;
