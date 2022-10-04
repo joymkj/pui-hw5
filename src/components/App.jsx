@@ -2,6 +2,7 @@ import './App.css';
 import Navbar from './Navbar.jsx';
 import Product from './Product.jsx';
 import Inventory from './Inventory';
+import MenuBar from './MenuBar';
 
 import { useState, useEffect } from 'react';
 
@@ -68,15 +69,7 @@ function App() {
     <div className="App">
       <Navbar cartSize={cartSize} cartTotal={cartTotal} roll={latestRoll} showPopup={showPopup} />
       <div className="Gallery">
-        <div className="menu">
-          <input type="text" onChange={handleSearch} />
-          <button onClick={searchButtonClicked}>Search</button>
-          <p style={{ display: 'inline' }}>sort by: </p>
-          <select onChange={handleSort}>
-            <option value="Name">Name</option>
-            <option value="Base Price">Base Price</option>
-          </select>
-        </div>
+        <MenuBar handleSearch={handleSearch} searchButtonClicked={searchButtonClicked} handleSort={handleSort} />
         {searchMatch || productList.length ? productList.map(renderRolls) : <p>No Match!</p>}
       </div>
     </div>
