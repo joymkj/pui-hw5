@@ -14,6 +14,7 @@ function App() {
   const [sort, setSort] = useState('Name');
   const [search, setSearch] = useState('');
   const [productList, setProductList] = useState(Inventory);
+  const [searchMatch, setSearchMatch] = useState(true);
 
   const updateCart = (Roll) => {
     setCartSize(cartSize + 1);
@@ -52,9 +53,15 @@ function App() {
     else productList.sort((a, b) => (a.price > b.price ? 1 : -1));
   }
 
+  function handleSearch(event) {
+    setSearch(event.target.value.toLowerCase());
+    if (Inventory.filter((str) => str.name.toLowerCase().includes(event.target.value.toLowerCase())).length)
+      setSearchMatch(true);
+    else setSearchMatch(false);
+  }
+
   function searchButtonClicked() {
     setProductList(Inventory.filter((str) => str.name.toLowerCase().includes(search)));
-    console.log(productList);
   }
 
   return (
@@ -62,7 +69,7 @@ function App() {
       <Navbar cartSize={cartSize} cartTotal={cartTotal} roll={latestRoll} showPopup={showPopup} />
       <div className="Gallery">
         <div className="menu">
-          <input type="text" onChange={(e) => setSearch(e.target.value.toLowerCase())} />
+          <input type="text" onChange={handleSearch} />
           <button onClick={searchButtonClicked}>Search</button>
           <p style={{ display: 'inline' }}>sort by: </p>
           <select onChange={handleSort}>
@@ -70,7 +77,7 @@ function App() {
             <option value="Base Price">Base Price</option>
           </select>
         </div>
-        {productList.map(renderRolls)}
+        {searchMatch || productList.length ? productList.map(renderRolls) : <p>No Match!</p>}
       </div>
     </div>
   );
