@@ -60,19 +60,32 @@ function Product({ id, updateCart }) {
                   onClick={() => setPackSize(1)}
                   defaultChecked
                 />
-                <label htmlFor={`${id}-1`} className="size-menu">
+                <label
+                  htmlFor={`${id}-1`}
+                  className="size-menu"
+                  value="1"
+                  style={{ backgroundColor: packSize === 1 ? '#c0c0c0' : 'white' }}>
                   1
                 </label>
                 <input type="radio" id={`${id}-3`} name={`${id}`} value="3" onClick={() => setPackSize(3)} />
-                <label htmlFor={`${id}-3`} className="size-menu">
+                <label
+                  htmlFor={`${id}-3`}
+                  className="size-menu"
+                  style={{ backgroundColor: packSize === 3 ? '#c0c0c0' : 'white' }}>
                   3
                 </label>
                 <input type="radio" id={`${id}-6`} name={`${id}`} value="6" onClick={() => setPackSize(6)} />
-                <label htmlFor={`${id}-6`} className="size-menu">
+                <label
+                  htmlFor={`${id}-6`}
+                  className="size-menu"
+                  style={{ backgroundColor: packSize === 6 ? '#c0c0c0' : 'white' }}>
                   6
                 </label>
                 <input type="radio" id={`${id}-12`} name={`${id}`} value="12" onClick={() => setPackSize(12)} />
-                <label htmlFor={`${id}-12`} className="size-menu size-menu-12">
+                <label
+                  htmlFor={`${id}-12`}
+                  className="size-menu size-menu-12"
+                  style={{ backgroundColor: packSize === 12 ? '#c0c0c0' : 'white' }}>
                   12
                 </label>
               </td>
