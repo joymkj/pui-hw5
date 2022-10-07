@@ -21,6 +21,7 @@ function App() {
   const [cartID, setCartID] = useState(0);
   const [showCart, setShowCart] = useState(false);
 
+  //Adds rolls to cart. Called when you click the Add to Cart button
   const updateCart = (Roll) => {
     Roll.id = cartID;
     setCartID(cartID + 1);
@@ -31,6 +32,7 @@ function App() {
     console.log(cart);
   };
 
+  //show the cart popup
   useEffect(() => {
     setShowPopup(true);
     let timer = setTimeout(() => {
@@ -41,6 +43,7 @@ function App() {
     };
   }, [cartID]);
 
+  //Return the roll component to be displayed. Called by mapping on the list of products
   function renderRolls(productList) {
     return (
       <Product
@@ -54,12 +57,14 @@ function App() {
     );
   }
 
+  //Sorts the list of products
   function handleSort(event) {
     setSort(event.target.value);
     if (event.target.value === 'Name') productList.sort((a, b) => (a.name > b.name ? 1 : -1));
     else productList.sort((a, b) => (a.price > b.price ? 1 : -1));
   }
 
+  //Search functionality
   function handleSearch(event) {
     setSearch(event.target.value.toLowerCase());
     if (Inventory.filter((str) => str.name.toLowerCase().includes(event.target.value.toLowerCase())).length)
@@ -67,10 +72,12 @@ function App() {
     else setSearchMatch(false);
   }
 
+  //updated productlist to match search
   function searchButtonClicked() {
     setProductList(Inventory.filter((str) => str.name.toLowerCase().includes(search)));
   }
 
+  //Returns the cart component
   function renderCart(cart) {
     return (
       <CartItem
@@ -85,7 +92,7 @@ function App() {
       />
     );
   }
-
+  //Deletes item from cart
   function deleteCart(id, price) {
     setCartTotal(cartTotal - price);
     setCartSize(cartSize - 1);
